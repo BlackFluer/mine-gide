@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minecraft University — Всё для новичка</title>
+  <style>
+    :root {
+      --primary: #2E7D32;
+      --accent: #FFC107;
+      --bg-dark: #1B1B1B;
+      --panel: #2B2B2B;
+      --text: #E0E0E0;
+      --wood: #8B4513;
+      --stone: #696969;
+      --grass: #388E3C;
+      --red: #d32f2f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+  margin: 0;
+  padding: 0;
+
+  /* запасной цвет, если картинка не загрузится */
+  background-color: #0f0f0f;
+
+  /* сама картинка */
+  background-image: url('img/bg-minecraft.jpg');
+
+  /* чтобы картинка не повторялась много раз */
+  background-repeat: no-repeat;
+
+  /* чтобы она заполнила весь экран, но не сплющилась */
+  background-size: cover;
+
+  /* чтобы была по центру */
+  background-position: center;
+
+  color: var(--text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+
+    /* === ШАПКА === */
+    header {
+      background: linear-gradient(135deg, var(--primary), #1a5f1a);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    nav button {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    nav button:hover, nav button.active {
+      background: var(--accent);
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    /* === КОНТЕНТ === */
+    main {
+      padding: 40px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .page {
+      display: none;
+      animation: fadeIn 0.5s ease;
+      background: var(--panel);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .page.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h2 {
+      border-left: 6px solid var(--accent);
+      padding-left: 15px;
+      color: var(--accent);
+      margin-top: 0;
+    }
+    h3 { color: #fff; margin-top: 28px; }
+    p { line-height: 1.6; margin-bottom: 15px; }
+    a { color: var(--accent); }
+
+    /* === СПИСКИ === */
+    ul { list-style: none; padding: 0; }
+    ul li {
+      background: rgba(255,255,255,0.05);
+      margin: 8px 0;
+      padding: 12px 14px;
+      border-radius: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    ul li::before {
+      content: "✅";
+      color: var(--grass);
+      flex-shrink: 0;
+    }
+
+    /* === КАРТОЧКИ === */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .card {
+      background: #333;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: scale(1.03); }
+    .card-img-placeholder {
+      width: 100%;
+      height: 180px;
+      background-color: #3a3a3a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 0.85rem;
+      text-align: center;
+      border: 2px dashed #555;
+      border-radius: 4px;
+    }
+    .card-img-placeholder::after { content: attr(data-label); }
+    .card-body { padding: 15px; }
+    .card h3 { margin: 0 0 8px 0; color: var(--accent); }
+
+    /* === ТАБЛИЦА === */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    th, td {
+      border: 1px solid #555;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th { background: var(--primary); color: #fff; }
+    td { background: #333; }
+
+    /* === КВИЗ === */
+    .quiz-container { max-width: 600px; margin: 0 auto 30px; }
+    .quiz-question { font-size: 1.1rem; margin-bottom: 15px; font-weight: 600; color: #fff; }
+    .options-grid { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+    .option-btn {
+      background: #444;
+      border: 1px solid #666;
+      color: white;
+      padding: 12px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: 0.2s;
+      font-family: inherit;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    .option-btn:hover { background: #555; border-color: var(--accent); }
+    .option-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+    .feedback { margin-top: 15px; font-weight: bold; min-height: 24px; }
+    .feedback.correct { color: var(--grass); }
+    .feedback.wrong { color: var(--red); }
+    .quiz-divider {
+      border: 0;
+      border-top: 1px solid #444;
+      margin: 30px 0;
+    }
+    .quiz-total {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--accent);
+      text-align: center;
+      margin-top: 20px;
+    }
+    .quiz-reset-btn {
+      display: block;
+      margin: 20px auto 0;
+      background: var(--accent);
+      border: none;
+      color: #000;
+      padding: 10px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    .quiz-reset-btn:hover { background: #ffb300; }
+
+    /* === СЕТКА КРАФТА === */
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 64px);
+      gap: 4px;
+      border: 3px solid var(--stone);
+      background: #555;
+      padding: 4px;
+      width: fit-content;
+      margin: 15px 0;
+    }
+    .craft-cell {
+      height: 64px;
+      width: 64px;
+      background: #333;
+      border: 1px solid #777;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      user-select: none;
+      font-weight: bold;
+      transition: transform 0.1s;
+    }
+    .craft-cell:hover { transform: scale(1.05); }
+    .craft-cell.filled-wood {
+      background-image: url('wood.png');
+      background-size: cover;
+      background-position: center;
+      border-color: transparent;
+      color: transparent;
+    }
+    .craft-cell.filled-stick {
+      background-image: url('stick.png');
+      background-size: cover;
+      background-position: center;
+      border-color: transparent;
+      color: transparent;
+    }
+    .craft-cell.filled-stone {
+      background-image: url('stone.png');
+      background-size: cover;
+      background-position: center;
+      border-color: transparent;
+      color: transparent;
+    }
+    .craft-cell.filled-coal {
+      background-image: url('coal.png');
+      background-size: cover;
+      background-position: center;
+      border-color: transparent;
+      color: transparent;
+    }
+    .craft-hint {
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-top: 8px;
+    }
+    .craft-success {
+      font-size: 1rem;
+      color: var(--grass);
+      font-weight: bold;
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* === ИНВЕНТАРЬ === */
+    .inventory-source {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+    .item-slot {
+      width: 56px;
+      height: 56px;
+      background: #333;
+      border: 1px solid #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .item-slot:active { cursor: grabbing; }
+    .item-slot .card-img-placeholder {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0;
+      font-size: 0.65rem;
+    }
+    .item-slot img { width: 100%; height: 100%; object-fit: cover; }
+    .inventory-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      min-height: 80px;
+      padding: 20px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      border: 2px dashed #555;
+      transition: border-color 0.2s;
+    }
+    .inventory-area.drag-over { border-color: var(--accent); }
+    .inventory-area .empty-hint {
+      color: #666;
+      font-style: italic;
+      width: 100%;
+      text-align: center;
+      margin: auto;
+    }
+
+    /* === ЧЕК-ЛИСТ === */
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 10px 0;
+      background: rgba(255,255,255,0.05);
+      padding: 10px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .checklist-item:hover { background: rgba(255,255,255,0.1); }
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      border: 3px solid var(--stone);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      background: #222;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .checklist-item.done .checkbox {
+      background: var(--grass);
+      border-color: var(--grass);
+      color: #000;
+    }
+    .checklist-item.done .checkbox::after {
+      content: "✓";
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .checklist-item.done span {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+    .checklist-progress {
+      margin-top: 16px;
+      font-weight: bold;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    /* === ПРОГРЕСС-БАР === */
+    .progress-bar {
+      width: 100%;
+      height: 24px;
+      background: #333;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #555;
+      margin: 12px 0;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--grass), #66bb6a);
+      width: 0%;
+      transition: width 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+
+    /* === ПОДВАЛ === */
+    footer {
+      text-align: center;
+      padding: 24px;
+      margin-top: 40px;
+      color: #666;
+      border-top: 1px solid #333;
+      font-size: 0.9rem;
+    }
+
+    /* === АДАПТИВ === */
+    @media (max-width: 700px) {
+      header { flex-direction: column; text-align: center; }
+      h1 { font-size: 1.4rem; }
+      nav button { padding: 6px 12px; font-size: 0.85rem; }
+      .options-grid { grid-template-columns: 1fr; }
+      .craft-grid { grid-template-columns: repeat(3, 48px); }
+      .craft-cell { height: 48px; width: 48px; }
+      .page { padding: 20px 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Minecraft University</h1>
+    <nav>
+      <button class="tab active" onclick="switchPage('home', this)">Главная</button>
+      <button class="tab" onclick="switchPage('basics', this)">Основы</button>
+      <button class="tab" onclick="switchPage('biomes', this)">Биомы</button>
+      <button class="tab" onclick="switchPage('mobs', this)">Мобы</button>
+      <button class="tab" onclick="switchPage('crafting', this)">Крафт</button>
+      <button class="tab" onclick="switchPage('enchant', this)">Зачарования</button>
+      <button class="tab" onclick="switchPage('quiz', this)">Квизы</button>
+      <button class="tab" onclick="switchPage('checklist', this)">Чек-лист</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ==================== ГЛАВНАЯ ==================== -->
+    <section id="home" class="page active">
+      <h2>Добро пожаловать в Университет!</h2>
+      <p>Здесь ты пройдёшь путь от «не знаю, как ломать блоки» до «строю фермы редстоуна». Обучение разбито на простые модули — выбирай вкладку сверху.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <img src="blockw.jpg" alt="блок дерева" class="card-img" />
+          <div class="card-body">
+            <h3>Основы выживания</h3>
+            <p>Как добыть первый ресурс, сделать верстак и не умереть в первую ночь.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="base.jpg" alt="база" class="card-img" />
+          <div class="card-body">
+            <h3>Биомы и ресурсы</h3>
+            <p>Где искать алмазы, а где лучше строить базу. Полный гид по миру.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="crafting-table.jpg" alt="верстак" class="card-img" />
+          <div class="card-body">
+            <h3>Крафт и механика</h3>
+            <p>Интерактивная сетка крафта и редкие рецепты, которые легко пропустить.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="table-enchants.jpg" alt="стол зачарований" class="card-img" />
+          <div class="card-body">
+            <h3>Зачарования</h3>
+            <p>Как зачаровывать оружие и броню, какие книги искать и что они дают.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Что тебя ждёт внутри</h3>
+      <ul>
+        <li><strong>7 разделов</strong> с теорией: основы, биомы, мобы, крафт, зачарования</li>
+        <li><strong>6 мини-квизов</strong> с моментальной проверкой и подсчётом очков</li>
+        <li><strong>4 интерактивных рецепта</strong> крафта на живой сетке 3×3</li>
+        <li><strong>Перетаскиваемый инвентарь</strong> — имитация игровой механики</li>
+        <li><strong>Чек-лист «День 1»</strong> с прогресс-баром</li>
+      </ul>
+    </section>
+
+    <!-- ==================== ОСНОВЫ ==================== -->
+    <section id="basics" class="page">
+      <h2>Основы игры</h2>
+      <p><strong>Главное правило:</strong> никогда не копай прямо под собой. Это убивает 90% новичков.</p>
+
+      <h3>Управление</h3>
+      <table>
+        <tr><th>Клавиша</th><th>Действие</th></tr>
+        <tr><td>W / A / S / D</td><td>Движение вперёд / влево / назад / вправо</td></tr>
+        <tr><td>Пробел</td><td>Прыжок</td></tr>
+        <tr><td>Shift</td><td>Присесть (не упадёшь с края)</td></tr>
+        <tr><td>ЛКМ</td><td>Ломать блок / ударить</td></tr>
+        <tr><td>ПКМ</td><td>Поставить блок / открыть сундук / съесть еду</td></tr>
+        <tr><td>1–9</td><td>Выбрать предмет из быстрого слота</td></tr>
+        <tr><td>E</td><td>Открыть инвентарь</td></tr>
+        <tr><td>Q</td><td>Выбросить предмет</td></tr>
+      </table>
+
+      <h3>Первые шаги</h3>
+      <ul>
+        <li>Добей дерево руками — нужно 4–5 блоков</li>
+        <li>Сделай доски (1 бревно = 4 доски)</li>
+        <li>Скрафти верстак (4 доски в сетке 2×2)</li>
+        <li>Поставь верстак и сделай палки (2 доски вертикально)</li>
+        <li>Сделай деревянную кирку и начни копать камень</li>
+        <li>Сделай каменную кирку, топор, меч — они прочнее</li>
+        <li>Построй убежище и поставь факелы до наступления ночи</li>
+      </ul>
+
+      <h3>Голод и здоровье</h3>
+      <ul>
+        <li>Полоска голода важнее здоровья — если она пустая, здоровье не восстанавливается</li>
+        <li>Сырое мясо восстанавливает мало голода, жарь его в печи</li>
+        <li>Яблоки падают с дубовых листьев — собирай их, пока нет печи</li>
+        <li>Если голод полон, здоровье регенерирует автоматически</li>
+      </ul>
+
+      <h3>Мини-практика: Собери инвентарь</h3>
+      <p style="color:#aaa;">Перетащи предметы в зону инвентаря ниже:</p>
+      <div class="inventory-source">
+        <div class="item-slot" draggable="true"><div class="card-img-placeholder" data-label="Кирка"></div></div>
+        <div class="item-slot" draggable="true"><div class="card-img-placeholder" data-label="Еда"></div></div>
+        <div class="item-slot" draggable="true"><div class="card-img-placeholder" data-label="Факел"></div></div>
+        <div class="item-slot" draggable="true"><div class="card-img-placeholder" data-label="Доски"></div></div>
+        <div class="item-slot" draggable="true"><div class="card-img-placeholder" data-label="Меч"></div></div>
+        <div class="item-slot" draggable="true"><div class="card-img-placeholder" data-label="Броня"></div></div>
+      </div>
+      <div class="inventory-area" id="inventory-drop-zone">
+        <p class="empty-hint">Зона инвентаря — перетаскивай сюда предметы</p>
+      </div>
+    </section>
+
+    <!-- ==================== БИОМЫ ==================== -->
+    <section id="biomes" class="page">
+      <h2>Гид по биомам</h2>
+      <p>Мир генерируется случайно, но знание биомов сэкономит часы игры.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <img src="plains.jpg" alt="Равнина" class="card-img" />
+          <div class="card-body">
+            <h3>Равнина (Plains)</h3>
+            <p>Лучший биом для старта. Много травы, овец, коров, лошадей. Часто встречаются деревни.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="taiga.jpg" alt="Тайга" class="card-img" />
+          <div class="card-body">
+            <h3>Тайга (Taiga)</h3>
+            <p>Много елей, волков и лис. Зимой выпадает снег. Удобно для деревянной базы.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="desert.jpg" alt="Пустыня" class="card-img" />
+          <div class="card-body">
+            <h3>Пустыня (Desert)</h3>
+            <p>Кактусы, песок, глиняные храмы с ловушками. Мало дерева — сложно для старта.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="jungle.jpg" alt="Джунгли" class="card-img" />
+          <div class="card-body">
+            <h3>Джунгли (Jungle)</h3>
+            <p>Самые высокие деревья. Оцелоты, попугаи, храмы и какао-бобы.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="ocean.jpg" alt="Океан" class="card-img" />
+          <div class="card-body">
+            <h3>Океан (Ocean)</h3>
+            <p>Рыба, водоросли, кораллы. Иногда — затонувшие корабли и подводные руины.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="mountains.jpg" alt="Горы" class="card-img" />
+          <div class="card-body">
+            <h3>Горы (Mountains)</h3>
+            <p>Высоко, красиво, есть изумруды. Опасно — высокий урон от падения.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="snowy-tundra.jpg" alt="Тундра" class="card-img" />
+          <div class="card-body">
+            <h3>Тундра (Snowy Tundra)</h3>
+            <p>Снег, лёд, белые медведи. Замёрзшая вода и редкая растительность.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="swamp.jpg" alt="Болото" class="card-img" />
+          <div class="card-body">
+            <h3>Болото (Swamp)</h3>
+            <p>Тёмная вода, лилии, ведьмы. Здесь растут сахарный тростник и грибы.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Где что добывать</h3>
+      <table>
+        <tr><th>Ресурс</th><th>Где искать</th><th>Инструмент</th></tr>
+        <tr><td>Дерево</td><td>Любой лес, равнина</td><td>Топор (руками тоже можно)</td></tr>
+        <tr><td>Камень</td><td>Под землёй, горы</td><td>Деревянная кирка и выше</td></tr>
+        <tr><td>Железо</td><td>Глубина 2–60 блоков</td><td>Каменная кирка и выше</td></tr>
+        <tr><td>Золото</td><td>Глубина 2–30, чаще в мезе</td><td>Железная кирка и выше</td></tr>
+        <tr><td>Алмазы</td><td>Глубина 2–16 блоков</td><td>Железная кирка и выше</td></tr>
+        <tr><td>Изумруды</td><td>Горы,Extreme Hills</td><td>Железная кирка и выше</td></tr>
+        <tr><td>Уголь</td><td>Любая высота под землёй</td><td>Деревянная кирка и выше</td></tr>
+        <tr><td>Лазурит</td><td>Глубина 2–30 блоков</td><td>Каменная кирка и выше</td></tr>
+      </table>
+    </section>
+
+    <!-- ==================== МОБЫ ==================== -->
+    <section id="mobs" class="page">
+      <h2>Мобы: кто друг, а кто враг</h2>
+      <p>Мобы делятся на три типа: мирные, нейтральные и враждебные. Знать их поведение — ключ к выживанию.</p>
+
+      <h3>Мирные мобы</h3>
+      <ul>
+        <li><strong>Корова</strong> — кожа и мясо. Самый полезный моб для старта.</li>
+        <li><strong>Овца</strong> — шерсть для кровати и декора.</li>
+        <li><strong>Свинья</strong> — только мясо, но много.</li>
+        <li><strong>Курица</strong> — мясо и перья для стрел.</li>
+        <li><strong>Лошадь</strong> — можно приручить и ездить верхом.</li>
+        <li><strong>Оцелот / кошка</strong> — отпугивает криперов.</li>
+      </ul>
+
+      <h3>Нейтральные мобы</h3>
+      <ul>
+        <li><strong>Волк</strong> — если ударишь, нападёт. Можно приручить костями.</li>
+        <li><strong>Эндермен</strong> — нападает, если посмотреть ему в глаза или ударить.</li>
+        <li><strong>Пиглин</strong> — в Нижнем мире. Можно торговать золотом.</li>
+        <li><strong>Пчела</strong> — если разозлить, нападёт роем и отравит.</li>
+      </ul>
+
+      <h3>Враждебные мобы</h3>
+      <table>
+        <tr><th>Моб</th><th>Чем опасен</th><th>Как бороться</th></tr>
+        <tr><td>Зомби</td><td>Бьёт в ближнем бою, приходит группами</td><td>Меч, дверь, свет</td></tr>
+        <tr><td>Скелет</td><td>Стреляет из лука издалека</td><td>Подбежать вплотную или щит</td></tr>
+        <tr><td>Крипер</td><td>Взрывается рядом с игроком</td><td>Убить до поджога, отойти на 3 блока</td></tr>
+        <tr><td>Паук</td><td>Лезет по стенам, атакует в прыжке</td><td>Меч, можно оградиться</td></tr>
+        <tr><td>Ведьма</td><td>Кидает зелья урона и яда</td><td>Лук, быстрая атака мечом</td></tr>
+        <tr><td>Житель-клоун</td><td>Кричит, призывает мобов</td><td>Не трогать, либо убить быстро</td></tr>
+      </table>
+
+      <h3>Советы по выживанию</h3>
+      <ul>
+        <li>Факелы каждые 7–8 блоков — мобы не спавнятся в светлых зонах</li>
+        <li>Щит блокирует атаки скелетов и зомби — сделай его из досок и железа</li>
+        <li>Кровать пропускает ночь — всегда носи с собой</li>
+        <li>Крипер бесшумно подходит — слушай шипение и сразу отходи</li>
+      </ul>
+    </section>
+
+    <!-- ==================== КРАФТ ==================== -->
+    <section id="crafting" class="page">
+      <h2>Интерактивный крафт</h2>
+      <p>Кликай по ячейкам, чтобы менять блоки. Пусто → Доска → Палка → Камень → Уголь → Пусто.</p>
+
+      <h3>Рецепт 1: Деревянная кирка</h3>
+      <ul style="font-size:0.9em; color:#aaa;">
+        <li>Верхний ряд: доска, доска, доска</li>
+        <li>Средний ряд: пусто, палка, пусто</li>
+        <li>Нижний ряд: пусто, палка, пусто</li>
+      </ul>
+      <div class="craft-grid" id="craft-grid-1"></div>
+      <p class="craft-hint" id="craft-hint-1">Собери рецепт: доски в верхнем ряду, палки по центру.</p>
+      <p class="craft-success" id="craft-success-1"></p>
+
+      <hr class="quiz-divider">
+
+      <h3>Рецепт 2: Верстак</h3>
+      <ul style="font-size:0.9em; color:#aaa;">
+        <li>4 доски в левом верхнем углу (сетка 2×2)</li>
+      </ul>
+      <div class="craft-grid" id="craft-grid-2"></div>
+      <p class="craft-hint" id="craft-hint-2">Поставь 4 доски в углу 2×2.</p>
+      <p class="craft-success" id="craft-success-2"></p>
+
+      <hr class="quiz-divider">
+
+      <h3>Рецепт 3: Печь</h3>
+      <ul style="font-size:0.9em; color:#aaa;">
+        <li>8 булыжников по кругу, центр пустой</li>
+      </ul>
+      <div class="craft-grid" id="craft-grid-3"></div>
+      <p class="craft-hint" id="craft-hint-3">Заполни все клетки камнем, кроме центра.</p>
+      <p class="craft-success" id="craft-success-3"></p>
+
+      <hr class="quiz-divider">
+
+      <h3>Рецепт 4: Факел</h3>
+      <ul style="font-size:0.9em; color:#aaa;">
+        <li>Уголь сверху, палка снизу (по центру)</li>
+      </ul>
+      <div class="craft-grid" id="craft-grid-4"></div>
+      <p class="craft-hint" id="craft-hint-4">Уголь в верхнем центре, палка прямо под ним.</p>
+      <p class="craft-success" id="craft-success-4"></p>
+    </section>
+
+    <!-- ==================== ЗАЧАРОВАНИЯ ==================== -->
+    <section id="enchant" class="page">
+      <h2>Зачарования</h2>
+      <p>Зачарования улучшают оружие, инструменты и броню. Нужны стол зачарования, опыт и лазурит.</p>
+
+      <h3>Как это работает</h3>
+      <ul>
+        <li>Нужен стол зачарования (4 обсидиана + 2 алмаза + 1 книга)</li>
+        <li>Положи предмет в слот и лазурит — появятся 3 варианта зачарования</li>
+        <li>1-й уровень — слабое, 3-й — самое мощное (нужно 30 уровней опыта)</li>
+        <li>Чем больше книжных полок вокруг стола (до 15), тем сильнее зачарования</li>
+      </ul>
+
+      <h3>Лучшие зачарования</h3>
+      <table>
+        <tr><th>Зачарование</th><th>Для чего</th><th>Эффект</th></tr>
+        <tr><td>Острота (Sharpness)</td><td>Меч</td><td>Дополнительный урон</td></tr>
+        <tr><td>Защита (Protection)</td><td>Броня</td><td>Снижает весь урон</td></tr>
+        <tr><td>Незойчивость (Unbreaking)</td><td>Всё</td><td>Предмет ломается медленнее</td></tr>
+        <tr><td>Эффективность (Efficiency)</td><td>Инструменты</td><td>Быстрее копаешь</td></tr>
+        <tr><td>Починка (Mending)</td><td>Всё</td><td>Чинится за счёт опыта</td></tr>
+        <tr><td>Шёлковое касание (Silk Touch)</td><td>Инструменты</td><td>Блоки падают целиком (стекло, лёд)</td></tr>
+        <tr><td>Удача (Fortune)</td><td>Кирка</td><td>Больше ресурсов из руды</td></tr>
+        <tr><td>Отдача (Knockback)</td><td>Меч</td><td>Отбрасывает врагов</td></tr>
+      </table>
+
+      <h3>Советы</h3>
+      <ul>
+        <li>Сначала зачаровывай железные предметы — алмазные побереги для лучших чар</li>
+        <li>«Починку» нельзя получить на столе — только из книг в торговле или данжах</li>
+        <li>«Удача» и «Шёлковое касание» несовместимы на одном предмете</li>
+        <li>Наковальня объединяет зачарования с книгами и стоит опыт</li>
+      </ul>
+    </section>
+
+    <!-- ==================== КВИЗЫ ==================== -->
+    <section id="quiz" class="page">
+      <h2>Проверь себя: мини-квизы</h2>
+      <p>Ответь на 6 вопросов. Счёт обновляется в реальном времени.</p>
+
+      <div class="quiz-container">
+        <h3 style="color:var(--accent);">Квиз 1: Выживание</h3>
+        <div class="quiz-question">Что нужно сделать в первую очередь при спавне?</div>
+        <div class="options-grid" data-quiz="q1">
+          <button class="option-btn" onclick="checkQuizAnswer('q1', 'дерево', this)">Добыть дерево руками</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q1', 'печь', this)">Сразу строить печь</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q1', 'алмазы', this)">Бежать искать алмазы</button>
+        </div>
+        <div class="feedback" id="feedback-q1"></div>
+      </div>
+
+      <hr class="quiz-divider">
+
+      <div class="quiz-container">
+        <h3 style="color:var(--accent);">Квиз 2: Мобы</h3>
+        <div class="quiz-question">Какой моб НЕ атакует игрока, если его не трогать?</div>
+        <div class="options-grid" data-quiz="q2">
+          <button class="option-btn" onclick="checkQuizAnswer('q2', 'свинья', this)">Свинья</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q2', 'крипер', this)">Крипер</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q2', 'зомби', this)">Зомби</button>
+        </div>
+        <div class="feedback" id="feedback-q2"></div>
+      </div>
+
+      <hr class="quiz-divider">
+
+      <div class="quiz-container">
+        <h3 style="color:var(--accent);">Квиз 3: Рецепты</h3>
+        <div class="quiz-question">Сколько досок нужно для верстака?</div>
+        <div class="options-grid" data-quiz="q3">
+          <button class="option-btn" onclick="checkQuizAnswer('q3', '4', this)">4</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q3', '6', this)">6</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q3', '9', this)">9</button>
+        </div>
+        <div class="feedback" id="feedback-q3"></div>
+      </div>
+
+      <hr class="quiz-divider">
+
+      <div class="quiz-container">
+        <h3 style="color:var(--accent);">Квиз 4: Биомы</h3>
+        <div class="quiz-question">В каком биоме больше всего дерева?</div>
+        <div class="options-grid" data-quiz="q4">
+          <button class="option-btn" onclick="checkQuizAnswer('q4', 'джунгли', this)">Джунгли</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q4', 'пустыня', this)">Пустыня</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q4', 'океан', this)">Океан</button>
+        </div>
+        <div class="feedback" id="feedback-q4"></div>
+      </div>
+
+      <hr class="quiz-divider">
+
+      <div class="quiz-container">
+        <h3 style="color:var(--accent);">Квиз 5: Опасности</h3>
+        <div class="quiz-question">Что произойдёт, если копать прямо под собой?</div>
+        <div class="options-grid" data-quiz="q5">
+          <button class="option-btn" onclick="checkQuizAnswer('q5', 'лава', this)">Можно упасть в лаву</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q5', 'ничего', this)">Ничего не случится</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q5', 'алмазы', this)">Сразу найдёшь алмазы</button>
+        </div>
+        <div class="feedback" id="feedback-q5"></div>
+      </div>
+
+      <hr class="quiz-divider">
+
+      <div class="quiz-container">
+        <h3 style="color:var(--accent);">Квиз 6: Зачарования</h3>
+        <div class="quiz-question">Сколько уровней опыта нужно для зачарования 3-го уровня?</div>
+        <div class="options-grid" data-quiz="q6">
+          <button class="option-btn" onclick="checkQuizAnswer('q6', '30', this)">30</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q6', '15', this)">15</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q6', '50', this)">50</button>
+        </div>
+        <div class="feedback" id="feedback-q6"></div>
+      </div>
+
+      <div class="quiz-total" id="quiz-total-score" style="display:none;"></div>
+      <button class="quiz-reset-btn" onclick="resetAllQuizzes()">Сбросить все квизы</button>
+    </section>
+
+    <!-- ==================== ЧЕК-ЛИСТ ==================== -->
+    <section id="checklist" class="page">
+      <h2>Чек-лист «День 1»</h2>
+      <p>Выполни все пункты — и ты готов к комфортному выживанию.</p>
+
+      <div class="progress-bar">
+        <div class="progress-bar-fill" id="progress-bar-fill">0%</div>
+      </div>
+
+      <div id="checklist-container">
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Добыть дерево (ломать руками)</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Сделать доски из дерева</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Скрафтить верстак (4 доски)</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Сделать палки (2 доски вертикально)</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Сделать деревянную кирку</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Накопать булыжника (минимум 16 блоков)</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Сделать каменную кирку, топор и меч</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Скрафтить печь (8 булыжников)</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Выплавить несколько слитков железа</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Построить убежище (стены + крыша + дверь)</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Поставить факелы внутри и вокруг базы</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Найти и приготовить еду</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Сделать кровать (3 шерсти + 3 доски)</span>
+        </div>
+        <div class="checklist-item" onclick="toggleCheck(this)">
+          <div class="checkbox"></div>
+          <span>Пережить первую ночь без смерти</span>
+        </div>
+      </div>
+
+      <div class="checklist-progress" id="checklist-progress">Выполнено: 0 из 14</div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; Minecraft University 2026. Учим новичков — без воды, по делу.
+  </footer>
+
+  <script>
+    // === ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ ===
+    function switchPage(id, btn) {
+      document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      var page = document.getElementById(id);
+      if (page) page.classList.add('active');
+      if (btn) btn.classList.add('active');
+    }
+
+    // === КВИЗЫ ===
+    var quizAnswers = {
+      q1: 'дерево',
+      q2: 'свинья',
+      q3: '4',
+      q4: 'джунгли',
+      q5: 'лава',
+      q6: '30'
+    };
+    var quizAnswered = {};
+
+    function checkQuizAnswer(qid, answer, clickedBtn) {
+      if (quizAnswered[qid]) return;
+      quizAnswered[qid] = answer;
+
+      var grid = clickedBtn.closest('.options-grid');
+      if (!grid) return;
+
+      grid.querySelectorAll('.option-btn').forEach(function(btn) {
+        btn.classList.add('disabled');
+        btn.disabled = true;
+        btn.style.outline = '';
+      });
+      clickedBtn.style.outline = '3px solid var(--accent)';
+
+      var fb = document.getElementById('feedback-' + qid);
+      if (!fb) return;
+
+      if (answer === quizAnswers[qid]) {
+        fb.textContent = '✅ Верно!';
+        fb.className = 'feedback correct';
+      } else {
+        var correctText = '';
+        grid.querySelectorAll('.option-btn').forEach(function(btn) {
+          if (btn.getAttribute('onclick').indexOf(quizAnswers[qid]) !== -1) {
+            correctText = btn.textContent;
+          }
+        });
+        fb.textContent = '❌ Неверно. Правильно: ' + correctText;
+        fb.className = 'feedback wrong';
+      }
+
+      updateQuizScore();
+    }
+
+    function updateQuizScore() {
+      var total = Object.keys(quizAnswers).length;
+      var answeredCount = Object.keys(quizAnswered).length;
+      var el = document.getElementById('quiz-total-score');
+      if (!el) return;
+
+      if (answeredCount === 0) {
+        el.style.display = 'none';
+        return;
+      }
+
+      var score = 0;
+      for (var key in quizAnswers) {
+        if (quizAnswered[key] === quizAnswers[key]) score++;
+      }
+
+      el.style.display = 'block';
+      if (answeredCount < total) {
+        el.textContent = 'Счёт: ' + score + ' / ' + total + ' (отвечено ' + answeredCount + ' из ' + total + ')';
+      } else {
+        var msg = score === total ? ' — отлично!' : score >= 4 ? ' — хорошо!' : ' — стоит повторить!';
+        el.textContent = 'Итог: ' + score + ' / ' + total + msg;
+      }
+    }
+
+    function resetAllQuizzes() {
+      Object.keys(quizAnswered).forEach(function(k) { delete quizAnswered[k]; });
+      for (var i = 1; i <= 6; i++) {
+        var fb = document.getElementById('feedback-q' + i);
+        if (!fb) continue;
+        fb.textContent = '';
+        fb.className = 'feedback';
+
+        var container = fb.closest('.quiz-container');
+        if (!container) continue;
+
+        var grid = container.querySelector('.options-grid');
+        if (!grid) continue;
+
+        grid.querySelectorAll('.option-btn').forEach(function(btn) {
+          btn.classList.remove('disabled');
+          btn.disabled = false;
+          btn.style.outline = '';
+        });
+      }
+      updateQuizScore();
+    }
+
+    // === СЕТКИ КРАФТА ===
+    var craftConfigs = [
+      {
+        gridId: 'craft-grid-1',
+        successId: 'craft-success-1',
+        hintId: 'craft-hint-1',
+        recipe: [1,1,1, 0,2,0, 0,2,0],
+        labels: [
+          { cls: 'wood' },
+          { cls: 'stick' }
+        ]
+      },
+      {
+        gridId: 'craft-grid-2',
+        successId: 'craft-success-2',
+        hintId: 'craft-hint-2',
+        recipe: [1,1,0, 1,1,0, 0,0,0],
+        labels: [
+          { cls: 'wood' }
+        ]
+      },
+      {
+        gridId: 'craft-grid-3',
+        successId: 'craft-success-3',
+        hintId: 'craft-hint-3',
+        recipe: [1,1,1, 1,0,1, 1,1,1],
+        labels: [
+          { cls: 'stone' }
+        ]
+      },
+      {
+        gridId: 'craft-grid-4',
+        successId: 'craft-success-4',
+        hintId: 'craft-hint-4',
+        recipe: [0,1,0, 0,2,0, 0,0,0],
+        labels: [
+          { cls: 'coal' },
+          { cls: 'stick' }
+        ]
+      }
+    ];
+
+    craftConfigs.forEach(function(cfg) {
+      var grid = document.getElementById(cfg.gridId);
+      if (!grid) return;
+      cfg.states = [];
+
+      for (var i = 0; i < 9; i++) {
+        var cell = document.createElement('div');
+        cell.className = 'craft-cell';
+        cell.addEventListener('click', (function(cfg, idx) {
+          return function() { toggleCraftCell(cfg, idx); };
+        })(cfg, i));
+        grid.appendChild(cell);
+        cfg.states.push(0);
+      }
+    });
+
+    function toggleCraftCell(cfg, i) {
+      var maxStates = cfg.labels.length + 1;
+      cfg.states[i] = (cfg.states[i] + 1) % maxStates;
+
+      var grid = document.getElementById(cfg.gridId);
+      var cell = grid.children[i];
+      cell.className = 'craft-cell';
+
+      if (cfg.states[i] > 0) {
+        var material = cfg.labels[cfg.states[i] - 1];
+        cell.classList.add('filled-' + material.cls);
+      }
+
+      checkCraftResult(cfg);
+    }
+
+    function checkCraftResult(cfg) {
+      var match = cfg.recipe.every(function(val, i) {
+        return cfg.states[i] === val;
+      });
+
+      var success = document.getElementById(cfg.successId);
+      var hint = document.getElementById(cfg.hintId);
+      if (!success || !hint) return;
+
+      if (match) {
+        success.style.display = 'block';
+        success.textContent = '🎉 Готово! Рецепт собран!';
+        hint.style.display = 'none';
+      } else {
+        success.style.display = 'none';
+        hint.style.display = 'block';
+      }
+    }
+
+    // === ПЕРЕТАСКИВАНИЕ ИНВЕНТАРЯ ===
+    (function() {
+      var dropZone = document.getElementById('inventory-drop-zone');
+      if (!dropZone) return;
+
+      var sourceItems = document.querySelectorAll('.inventory-source .item-slot');
+
+      sourceItems.forEach(function(item) {
+        item.addEventListener('dragstart', function(e) {
+          e.dataTransfer.setData('text/plain', '');
+          item._dragged = true;
+        });
+        item.addEventListener('dragend', function() {
+          item._dragged = false;
+        });
+      });
+
+      dropZone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        dropZone.classList.add('drag-over');
+      });
+      dropZone.addEventListener('dragleave', function() {
+        dropZone.classList.remove('drag-over');
+      });
+      dropZone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        dropZone.classList.remove('drag-over');
+
+        // Удаляем подсказку
+        var hint = dropZone.querySelector('.empty-hint');
+        if (hint) hint.remove();
+
+        // Находим перетаскиваемый элемент
+        var draggedItem = null;
+        sourceItems.forEach(function(item) {
+          if (item._dragged) draggedItem = item;
+        });
+        if (!draggedItem) return;
+
+        // Клонируем только содержимое
+        var inner = draggedItem.querySelector('.card-img-placeholder');
+        if (!inner) return;
+
+        var clone = inner.cloneNode(true);
+        var slot = document.createElement('div');
+        slot.className = 'item-slot';
+        slot.appendChild(clone);
+        dropZone.appendChild(slot);
+
+        // Прячем оригинал
+        draggedItem.style.display = 'none';
+        draggedItem._dragged = false;
+      });
+    })();
+
+    // === ЧЕК-ЛИСТ ===
+    function toggleCheck(el) {
+      el.classList.toggle('done');
+      updateChecklistProgress();
+    }
+
+    function updateChecklistProgress() {
+      var all = document.querySelectorAll('.checklist-item');
+      var done = document.querySelectorAll('.checklist-item.done');
+      var total = all.length;
+      var count = done.length;
+      var percent = Math.round((count / total) * 100);
+
+      var progressText = document.getElementById('checklist-progress');
+      if (progressText) {
+        progressText.textContent = 'Выполнено: ' + count + ' из ' + total;
+      }
+
+      var barFill = document.getElementById('progress-bar-fill');
+      if (barFill) {
+        barFill.style.width = percent + '%';
+        barFill.textContent = percent > 0 ? percent + '%' : '';
+      }
+    }
+
+    // Инициализация
+    updateChecklistProgress();
+  </script>
+</body>
+</html>
