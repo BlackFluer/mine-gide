@@ -662,7 +662,7 @@
         <tr><td>Крипер</td><td>Взрывается рядом с игроком</td><td>Убить до поджога, отойти на 3 блока</td></tr>
         <tr><td>Паук</td><td>Лезет по стенам, атакует в прыжке</td><td>Меч, можно оградиться</td></tr>
         <tr><td>Ведьма</td><td>Кидает зелья урона и яда</td><td>Лук, быстрая атака мечом</td></tr>
-        <tr><td>Житель-клоун</td><td>Кричит, призывает мобов</td><td>Не трогать, либо убить быстро</td></tr>
+        <tr><td>Призыватель</td><td>Кричит, призывает маленьких вредин с мечом</td><td>Не трогать, либо убить быстро</td></tr>
       </table>
 
       <h3>Советы по выживанию</h3>
@@ -755,17 +755,17 @@
       </ul>
     </section>
 
-    <!-- ==================== КВИЗЫ ==================== -->
+    <!-- ==================== ЗАДАНИЯ ==================== -->
     <section id="quiz" class="page">
-      <h2>Проверь себя: мини-квизы</h2>
+      <h2>Проверь себя: мини-задания</h2>
       <p>Ответь на 6 вопросов. Счёт обновляется в реальном времени.</p>
 
       <div class="quiz-container">
-        <h3 style="color:var(--accent);">Квиз 1: Выживание</h3>
+        <h3 style="color:var(--accent);">Задание 1: Выживание</h3>
         <div class="quiz-question">Что нужно сделать в первую очередь при спавне?</div>
         <div class="options-grid" data-quiz="q1">
-          <button class="option-btn" onclick="checkQuizAnswer('q1', 'дерево', this)">Добыть дерево руками</button>
           <button class="option-btn" onclick="checkQuizAnswer('q1', 'печь', this)">Сразу строить печь</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q1', 'дерево', this)">Добыть дерево руками</button>
           <button class="option-btn" onclick="checkQuizAnswer('q1', 'алмазы', this)">Бежать искать алмазы</button>
         </div>
         <div class="feedback" id="feedback-q1"></div>
@@ -774,12 +774,12 @@
       <hr class="quiz-divider">
 
       <div class="quiz-container">
-        <h3 style="color:var(--accent);">Квиз 2: Мобы</h3>
+        <h3 style="color:var(--accent);">Задание 2: Мобы</h3>
         <div class="quiz-question">Какой моб НЕ атакует игрока, если его не трогать?</div>
         <div class="options-grid" data-quiz="q2">
-          <button class="option-btn" onclick="checkQuizAnswer('q2', 'свинья', this)">Свинья</button>
           <button class="option-btn" onclick="checkQuizAnswer('q2', 'крипер', this)">Крипер</button>
           <button class="option-btn" onclick="checkQuizAnswer('q2', 'зомби', this)">Зомби</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q2', 'свинья', this)">Свинья</button>
         </div>
         <div class="feedback" id="feedback-q2"></div>
       </div>
@@ -787,11 +787,11 @@
       <hr class="quiz-divider">
 
       <div class="quiz-container">
-        <h3 style="color:var(--accent);">Квиз 3: Рецепты</h3>
+        <h3 style="color:var(--accent);">Задание 3: Рецепты</h3>
         <div class="quiz-question">Сколько досок нужно для верстака?</div>
         <div class="options-grid" data-quiz="q3">
-          <button class="option-btn" onclick="checkQuizAnswer('q3', '4', this)">4</button>
           <button class="option-btn" onclick="checkQuizAnswer('q3', '6', this)">6</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q3', '4', this)">4</button>
           <button class="option-btn" onclick="checkQuizAnswer('q3', '9', this)">9</button>
         </div>
         <div class="feedback" id="feedback-q3"></div>
@@ -800,12 +800,12 @@
       <hr class="quiz-divider">
 
       <div class="quiz-container">
-        <h3 style="color:var(--accent);">Квиз 4: Биомы</h3>
+        <h3 style="color:var(--accent);">Задание 4: Биомы</h3>
         <div class="quiz-question">В каком биоме больше всего дерева?</div>
         <div class="options-grid" data-quiz="q4">
-          <button class="option-btn" onclick="checkQuizAnswer('q4', 'джунгли', this)">Джунгли</button>
           <button class="option-btn" onclick="checkQuizAnswer('q4', 'пустыня', this)">Пустыня</button>
           <button class="option-btn" onclick="checkQuizAnswer('q4', 'океан', this)">Океан</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q4', 'джунгли', this)">Джунгли</button>
         </div>
         <div class="feedback" id="feedback-q4"></div>
       </div>
@@ -813,12 +813,12 @@
       <hr class="quiz-divider">
 
       <div class="quiz-container">
-        <h3 style="color:var(--accent);">Квиз 5: Опасности</h3>
+        <h3 style="color:var(--accent);">Задание 5: Опасности</h3>
         <div class="quiz-question">Что произойдёт, если копать прямо под собой?</div>
         <div class="options-grid" data-quiz="q5">
-          <button class="option-btn" onclick="checkQuizAnswer('q5', 'лава', this)">Можно упасть в лаву</button>
           <button class="option-btn" onclick="checkQuizAnswer('q5', 'ничего', this)">Ничего не случится</button>
           <button class="option-btn" onclick="checkQuizAnswer('q5', 'алмазы', this)">Сразу найдёшь алмазы</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q5', 'лава', this)">Можно упасть в лаву</button>
         </div>
         <div class="feedback" id="feedback-q5"></div>
       </div>
@@ -826,18 +826,18 @@
       <hr class="quiz-divider">
 
       <div class="quiz-container">
-        <h3 style="color:var(--accent);">Квиз 6: Зачарования</h3>
+        <h3 style="color:var(--accent);">Задание 6: Зачарования</h3>
         <div class="quiz-question">Сколько уровней опыта нужно для зачарования 3-го уровня?</div>
         <div class="options-grid" data-quiz="q6">
-          <button class="option-btn" onclick="checkQuizAnswer('q6', '30', this)">30</button>
           <button class="option-btn" onclick="checkQuizAnswer('q6', '15', this)">15</button>
+          <button class="option-btn" onclick="checkQuizAnswer('q6', '30', this)">30</button>
           <button class="option-btn" onclick="checkQuizAnswer('q6', '50', this)">50</button>
         </div>
         <div class="feedback" id="feedback-q6"></div>
       </div>
 
       <div class="quiz-total" id="quiz-total-score" style="display:none;"></div>
-      <button class="quiz-reset-btn" onclick="resetAllQuizzes()">Сбросить все квизы</button>
+      <button class="quiz-reset-btn" onclick="resetAllQuizzes()">Сбросить все задания</button>
     </section>
 
     <!-- ==================== ЧЕК-ЛИСТ ==================== -->
